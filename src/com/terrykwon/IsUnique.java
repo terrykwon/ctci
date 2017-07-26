@@ -6,6 +6,8 @@ package com.terrykwon;
 public class IsUnique {
 
     /**
+     * Simple double loop.
+     *
      * Time complexity: O(n^2)
      * Space complexity: O(1)
      */
@@ -23,9 +25,36 @@ public class IsUnique {
         return true;
     }
 
-    public static void main(String[] args) {
-        String s = "123456";
+    /**
+     * Hash table implementation.
+     *
+     * Notes:
+     * Chars can be used as array indices (automatically converted to int).
+     *
+     * Time complexity: O(N)
+     * Space complexity: O(1)
+     */
+    private static boolean isUnique2(String s) {
+        char[] arr = s.toCharArray();
+        int[] table = new int[256]; // Assume there are only 256 possible characters (ASCII).
 
-        System.out.println(isUnique(s));
+        for (char c : arr) {
+            if (table[c] > 0) {
+                return false;
+            }
+
+            table[c] += 1;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        String s = "1234566";
+
+        System.out.println(isUnique2(s));
+
+        char c = 'g';
+        System.out.println(c + 'g');
     }
 }
