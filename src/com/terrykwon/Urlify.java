@@ -5,12 +5,15 @@ import java.util.Arrays;
 /**
  * Write a method to replace all spaces in a string with '%20'.
  * You must modify the string in-place.
- *
- * Time complexity: O(N)
- * Space complexity: O(1)
  */
 public class Urlify {
 
+    /**
+     * Insert at end.
+     *
+     * Time complexity: O(N)
+     * Space complexity: O(1)
+     */
     private static String Urlify(String s) {
         if (s.length() == 0) {
             return s;
