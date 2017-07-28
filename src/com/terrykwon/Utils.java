@@ -20,12 +20,22 @@ public class Utils {
         System.out.println();
     }
 
+    public static void printArray(int[][] arr) {
+        for (int[] row : arr) {
+            for (int c : row) {
+                System.out.print(c);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
     public static char[][] generateMatrix(int width, int height) {
         String seed = "abcdefghijklmnopqrstuvwxyz123456789";
-        char[][] matrix = new char[width][height];
+        char[][] matrix = new char[height][width];
 
-        for (int r = 0; r < width; r++) {
-            for (int c = 0; c < height; c++) {
+        for (int r = 0; r < height; r++) {
+            for (int c = 0; c < width; c++) {
                 matrix[r][c] = seed.charAt((width * r + c) % seed.length());
             }
         }
