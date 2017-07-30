@@ -1,4 +1,4 @@
-package com.terrykwon;
+package com.terrykwon.arrays;
 
 import java.util.HashMap;
 import java.util.Map;

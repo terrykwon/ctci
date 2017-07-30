@@ -1,4 +1,4 @@
-package com.terrykwon;
+package com.terrykwon.arrays;
 
 /**
  * Implement an algorithm to determine if a string has all unique characters.

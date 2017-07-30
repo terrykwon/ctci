@@ -1,4 +1,4 @@
-package com.terrykwon;
+package com.terrykwon.arrays;
 
 import static com.terrykwon.Utils.generateMatrix;
 import static com.terrykwon.Utils.printArray;

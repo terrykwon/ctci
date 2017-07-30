@@ -1,43 +1,29 @@
-package com.terrykwon;
+package com.terrykwon.linkedlists;
 
 import static org.junit.Assert.*;
 import org.testng.annotations.Test;
 
-public class SinglyLinkedListTest {
+
+public class DoublyLinkedListTest {
 
 //    public static void main(String[] args) {
-//        SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+//        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+//        System.out.println(list);
 //
 //        list.addFirst(1);
 //        System.out.println(list);
+//
 //        list.addFirst(0);
-//        System.out.println(list);
 //        list.addLast(2);
-//        System.out.println(list);
-//        list.addLast(3);
-//        System.out.println(list);
-//        list.removeFirst();
-//        System.out.println(list);
-//        list.removeFirst();
-//        System.out.println(list);
-//        list.removeFirst();
-//        System.out.println(list);
-//        list.removeFirst();
-//        System.out.println(list);
-//        list.addFirst(1);
-//        System.out.println(list);
-//        list.addFirst(0);
-//        System.out.println(list);
-//        list.addLast(2);
-//        System.out.println(list);
-//        list.addLast(3);
 //        System.out.println(list);
 //
+//        System.out.println(list.first());
+//        System.out.println(list.last());
 //    }
 
     @Test
     public void testToString() throws Exception {
-        SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
         assertEquals("", list.toString());
 
         list.addLast(1);
@@ -50,7 +36,7 @@ public class SinglyLinkedListTest {
 
     @Test
     public void testRemoveFirst() throws Exception {
-        SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
         assertNull(list.removeFirst());
 
         list.addFirst(1);
@@ -61,8 +47,20 @@ public class SinglyLinkedListTest {
     }
 
     @Test
+    public void testRemoveLast() throws Exception {
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+        assertNull(list.removeLast());
+
+        list.addLast(1);
+        list.addLast(2);
+
+        assertEquals(2, (int) list.removeLast());
+        assertEquals(1, (int) list.removeLast());
+    }
+
+    @Test
     public void testFirst() throws Exception {
-        SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
         assertNull(list.first());
 
         list.addFirst(1);
@@ -73,7 +71,7 @@ public class SinglyLinkedListTest {
 
     @Test
     public void testLast() throws Exception {
-        SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
         assertNull(list.last());
 
         list.addFirst(1);
@@ -84,8 +82,8 @@ public class SinglyLinkedListTest {
 
     @Test
     public void testEquals() throws Exception {
-        SinglyLinkedList<Integer> listA = new SinglyLinkedList<>();
-        SinglyLinkedList<Integer> listB = new SinglyLinkedList<>();
+        DoublyLinkedList<Integer> listA = new DoublyLinkedList<>();
+        DoublyLinkedList<Integer> listB = new DoublyLinkedList<>();
 
         assertEquals(false, listA == listB);
 
@@ -104,4 +102,5 @@ public class SinglyLinkedListTest {
         assertEquals(true, listA.equals(listB));
         assertEquals(true, listB.equals(listA));
     }
+
 }

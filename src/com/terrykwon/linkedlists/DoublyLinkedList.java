@@ -1,4 +1,4 @@
-package com.terrykwon;
+package com.terrykwon.linkedlists;
 
 /**
  * An implementation of a doubly linked list.

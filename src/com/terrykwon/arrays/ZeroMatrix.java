@@ -1,4 +1,6 @@
-package com.terrykwon;
+package com.terrykwon.arrays;
+
+import com.terrykwon.Utils;
 
 import java.util.HashSet;
 import java.util.Set;

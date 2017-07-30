@@ -1,4 +1,4 @@
-package com.terrykwon;
+package com.terrykwon.arrays;
 
 /**
  * Reverse an array in-place.

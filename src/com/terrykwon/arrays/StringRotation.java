@@ -1,4 +1,4 @@
-package com.terrykwon;
+package com.terrykwon.arrays;
 
 /**
  * Assume you have a method {@code isSubstring()} which checks if one word is a substring of another.
