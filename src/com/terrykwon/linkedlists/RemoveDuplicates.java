@@ -42,6 +42,29 @@ public class RemoveDuplicates {
 
             }
         }
+
+        /**
+         * A solution using two runners.
+         *
+         * Time complexity: O(N^2), since N + N-1 + N-2 + ... + 1
+         * Space complexity: O(1)
+         */
+        <E> void removeDuplicates2() {
+            Node<E> runnerA = (Node<E>) header;
+
+            while (runnerA != trailer) {
+                Node<E> runnerB = runnerA.getNext();
+
+                while (runnerB != trailer) {
+                    if (runnerB.getElement() == runnerA.getElement()) {
+                        runnerB.getPrev().setNext(runnerB.getNext());
+                        runnerB.getNext().setPrev(runnerB.getPrev());
+                    }
+                    runnerB = runnerB.getNext();
+                }
+                runnerA = runnerA.getNext();
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -50,9 +73,18 @@ public class RemoveDuplicates {
 
         System.out.println(list);
 
-        list.removeDuplicates();
+        list.removeDuplicates2();
 
         System.out.println(list);
+
+        Integer[] arr2 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        CustomLinkedList list2 = new CustomLinkedList(arr2);
+
+        System.out.println(list2);
+
+        list2.removeDuplicates2();
+        System.out.println(list2);
+
     }
 
 }
