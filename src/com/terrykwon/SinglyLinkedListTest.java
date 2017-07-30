@@ -81,4 +81,27 @@ public class SinglyLinkedListTest {
 
         assertEquals(1, (int) list.last());
     }
+
+    @Test
+    public void testEquals() throws Exception {
+        SinglyLinkedList<Integer> listA = new SinglyLinkedList<>();
+        SinglyLinkedList<Integer> listB = new SinglyLinkedList<>();
+
+        assertEquals(false, listA == listB);
+
+        assertEquals(true, listA.equals(listB));
+        assertEquals(true, listB.equals(listA));
+
+        listA.addLast(1);
+        listA.addLast(2);
+        listB.addLast(1);
+
+        assertEquals(false, listA.equals(listB));
+        assertEquals(false, listB.equals(listA));
+
+        listB.addLast(2);
+
+        assertEquals(true, listA.equals(listB));
+        assertEquals(true, listB.equals(listA));
+    }
 }

@@ -97,6 +97,36 @@ public class SinglyLinkedList<E> {
         return element;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        SinglyLinkedList other = (SinglyLinkedList) obj;
+
+        if (size() != other.size()) {
+            return false;
+        }
+
+        Node walkA = head;
+        Node walkB = other.head;
+
+        while (walkA != null) {
+            if (walkA.getElement() != walkB.getElement()) {
+                return false;
+            }
+            walkA = walkA.getNext();
+            walkB = walkB.getNext();
+        }
+
+        return true;
+    }
+
     private static class Node<E> {
         private E element;
         private Node<E> next;

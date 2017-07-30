@@ -104,7 +104,37 @@ public class DoublyLinkedList<E> {
         return builder.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
 
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        DoublyLinkedList other = (DoublyLinkedList) obj;
+
+        if (size() != other.size()) {
+            return false;
+        }
+
+        Node walkA = header;
+        Node walkB = other.header;
+
+        while (walkA.getNext() != trailer) {
+            if (walkA.getElement() != walkB.getElement()) {
+                return false;
+            }
+
+            walkA = walkA.getNext();
+            walkB = walkB.getNext();
+        }
+
+
+        return true;
+    }
 
     private static class Node<E> {
         private E element;
