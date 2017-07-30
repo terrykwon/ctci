@@ -5,8 +5,8 @@ package com.terrykwon.linkedlists;
  */
 public class SinglyLinkedList<E> {
 
-    private Node<E> head = null;
-    private Node<E> tail = null; // Keep track of tail to avoid traversing full length when inserting at end.
+    protected Node<E> head = null;
+    protected Node<E> tail = null; // Keep track of tail to avoid traversing full length when inserting at end.
     private int size = 0; // Keep track of length of list; or else you would need to traverse full length.
 
     public SinglyLinkedList() {
@@ -127,7 +127,7 @@ public class SinglyLinkedList<E> {
         return true;
     }
 
-    private static class Node<E> {
+    protected static class Node<E> {
         private E element;
         private Node<E> next;
 

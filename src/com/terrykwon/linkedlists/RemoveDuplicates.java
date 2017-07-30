@@ -8,9 +8,10 @@ import java.util.HashSet;
 public class RemoveDuplicates {
 
     private static class CustomLinkedList<E> extends DoublyLinkedList<E> {
+
         CustomLinkedList(E[] arr) {
             for (E item : arr) {
-                this.addLast(item);
+                addLast(item);
             }
         }
 
@@ -49,8 +50,8 @@ public class RemoveDuplicates {
          * Time complexity: O(N^2), since N + N-1 + N-2 + ... + 1
          * Space complexity: O(1)
          */
-        <E> void removeDuplicates2() {
-            Node<E> runnerA = (Node<E>) header;
+        void removeDuplicates2() {
+            Node<E> runnerA = header;
 
             while (runnerA != trailer) {
                 Node<E> runnerB = runnerA.getNext();
