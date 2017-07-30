@@ -8,9 +8,9 @@ package com.terrykwon.linkedlists;
  * node with null values.
  */
 public class DoublyLinkedList<E> {
-    private Node<E> header;
-    private Node<E> trailer;
-    private int size = 0;
+    protected Node<E> header;
+    protected Node<E> trailer;
+    protected int size = 0;
 
     public DoublyLinkedList() {
         header = new Node<>(null, null, null);
@@ -136,7 +136,16 @@ public class DoublyLinkedList<E> {
         return true;
     }
 
-    private static class Node<E> {
+    public static <T> DoublyLinkedList<T> fromArray(T[] array) {
+        DoublyLinkedList<T> list = new DoublyLinkedList<>();
+        for (T item : array) {
+            list.addLast(item);
+        }
+
+        return list;
+    }
+
+    protected static class Node<E> {
         private E element;
         private Node<E> prev;
         private Node<E> next;
