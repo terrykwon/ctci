@@ -13,6 +13,12 @@ public class SinglyLinkedList<E> {
 
     }
 
+    public SinglyLinkedList(E[] arr) {
+        for (E item : arr) {
+            addLast(item);
+        }
+    }
+
     public int size() {
         return size;
     }
