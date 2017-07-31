@@ -140,6 +140,10 @@ public class SinglyLinkedList<E> {
             return element;
         }
 
+        public void setElement(E element) {
+            this.element = element;
+        }
+
         public Node<E> getNext() {
             return next;
         }
