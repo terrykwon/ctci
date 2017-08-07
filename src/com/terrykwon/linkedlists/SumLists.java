@@ -4,14 +4,14 @@ import com.terrykwon.linkedlists.SinglyLinkedList.Node;
 
 /**
  * You have two numbers represented by a liknked list, where each node contains a single digit.
- * Write a function that adds the two numbers and returns the sum as a linked list.
+ * Write a function that adds the two numbers and returns the node as a linked list.
  */
 public class SumLists {
 
     /**
      * Lowest digit = head.
      *
-     * Time complexity: O(N), where N is the length of the sum.
+     * Time complexity: O(N), where N is the length of the node.
      * Space complexity: O(1)
      */
     private static SinglyLinkedList sumLists(SinglyLinkedList<Integer> l1, SinglyLinkedList<Integer> l2) {
@@ -44,12 +44,86 @@ public class SumLists {
             }
         }
 
-        // If the sum is longer than both n1 and n2
+        // If the node is longer than both n1 and n2
         if (carry == 1) {
             res.addLast(carry);
         }
 
         return res;
+    }
+
+    /**
+     * Highest digit = head
+     *
+     * Uses a (node, carry) tuple.
+     *
+     * Time complexity: O(N), where N is the length of the node.
+     * Space complexity: O(1)
+     */
+    private static SinglyLinkedList<Integer> sumLists2(SinglyLinkedList<Integer> l1, SinglyLinkedList<Integer> l2) {
+
+        padZeros(l1, l2);
+
+        Node<Integer> n1 = l1.head;
+        Node<Integer> n2 = l2.head;
+
+        NodeCarry headNodeCarry = sumNodeCarry(n1, n2);
+        SinglyLinkedList<Integer> result = new SinglyLinkedList<>();
+        result.head = headNodeCarry.node;
+
+        if (headNodeCarry.carry > 0) {
+            result.addFirst(headNodeCarry.carry);
+        }
+
+        return result;
+    }
+
+    /**
+     * Gets the carry of the next digit node through recursion.
+     */
+    private static NodeCarry sumNodeCarry(Node<Integer> n1, Node<Integer> n2) {
+        int currentSum = n1.getElement() + n2.getElement();
+        int carry;
+
+        if (n1.getNext() == null) {
+            carry = (n1.getElement() + n2.getElement()) / 10;
+            return new NodeCarry(currentSum % 10, carry);
+        }
+
+        // Through recursion, gets the node and carry of the next (lower) digit pair.
+        NodeCarry nextNodeCarry = sumNodeCarry(n1.getNext(), n2.getNext());
+
+        carry = (currentSum + nextNodeCarry.carry) / 10;
+
+        NodeCarry currentNodeCarry = new NodeCarry((currentSum + nextNodeCarry.carry) % 10, carry);
+        currentNodeCarry.node.setNext(nextNodeCarry.node);
+
+        return currentNodeCarry;
+    }
+
+    /**
+     * Ensures two lists are the same length by padding the shorter list with 0s.
+     */
+    private static void padZeros(SinglyLinkedList<Integer> l1, SinglyLinkedList<Integer> l2) {
+        while (l1.size() < l2.size()) {
+            l1.addFirst(0);
+        }
+        while (l2.size() < l1.size()) {
+            l2.addFirst(0);
+        }
+    }
+
+    /**
+     * A tuple to hold a Node and carry.
+     */
+    private static class NodeCarry {
+        Node<Integer> node;
+        int carry;
+
+        NodeCarry(int sum, int carry) {
+            this.node = new Node<>(sum, null);
+            this.carry = carry;
+        }
     }
 
     public static void main(String[] args) {
@@ -64,6 +138,13 @@ public class SumLists {
         System.out.println(sumLists(l1, l3)); // 339474
         System.out.println(sumLists(l4, l5)); // 0 * 8 then 1
         System.out.println(sumLists(l6, l6)); // 0
+
+        System.out.println();
+
+        System.out.println(sumLists2(l1, l2)); // 1308
+        System.out.println(sumLists2(l1, l3)); // 614290
+        System.out.println(sumLists2(l4, l5)); // 1 then 0*8
+        System.out.println(sumLists2(l6, l6)); // 0
 
     }
 }
