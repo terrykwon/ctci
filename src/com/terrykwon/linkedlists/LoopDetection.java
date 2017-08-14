@@ -26,13 +26,49 @@ public class LoopDetection {
             set.add(head);
 
             if (set.contains(head.getNext())) {
-                return head;
+                return head.getNext();
             }
 
             head = head.getNext();
         }
 
         return null;
+    }
+
+    /**
+     * A solution using two pointers, one traversing one node and a time while the second traverses two at a time.
+     * Since the second pointer "catches up" to the slower pointer by one node at each step, we can calculate the
+     * start of the loop.
+     *
+     * Time complexity: O(N)
+     * Space complexity: O(1)
+     */
+    private static <E> Node<E> detectLoop2(Node<E> head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node<E> slow = head;
+        Node<E> fast = head;
+
+        do {
+            if (fast.getNext() == null || fast.getNext().getNext() == null) {
+                // Reached end of the list, so no loop.
+                return null;
+            }
+
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        } while (fast != slow);
+
+        // Move one pointer to beginning.
+        slow = head;
+        while (slow != fast) {
+            slow = slow.getNext();
+            fast = fast.getNext();
+        }
+
+        return slow;
     }
 
     public static void main(String[] args) {
@@ -47,6 +83,7 @@ public class LoopDetection {
         n8.setNext(n4);
 
 //        SinglyLinkedList.printList(n1);
-        System.out.println(detectLoop(n1).getElement()); // 8
+        System.out.println(detectLoop(n1).getElement()); // 4
+        System.out.println(detectLoop2(n1).getElement()); // 4
     }
 }
