@@ -21,7 +21,7 @@ public interface List<E> {
      *
      * @param i the index of the element to be replaced.
      * @param element   the new element.
-     * @return  the new element.
+     * @return  the replaced (old) element.
      * @throws IndexOutOfBoundsException
      */
     E set(int i, E element) throws IndexOutOfBoundsException;
