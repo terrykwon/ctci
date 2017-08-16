@@ -59,6 +59,8 @@ public class ArrayList<E> implements List<E> {
     @Override
     public void add(int i, E element) throws IndexOutOfBoundsException, IllegalStateException {
         checkIndex(i, size + 1);
+        growIfNeeded(size + 1);
+
         if (size == data.length) {
             throw new IllegalStateException("Array is full"); // Should fix this with dynamic array.
         }
@@ -73,6 +75,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public E remove(int i) throws IndexOutOfBoundsException {
         checkIndex(i, size);
+        shrinkIfNeeded(size - 1);
 
         E temp = data[i];
 
@@ -123,5 +126,35 @@ public class ArrayList<E> implements List<E> {
         }
 
         return true;
+    }
+
+    private void growIfNeeded(int newSize) {
+        if (newSize > data.length) {
+            E[] newData = (E[]) new Object[data.length * 2];
+            for (int i = 0; i < size; i ++) {
+                newData[i] = data[i];
+            }
+
+            E[] temp = data;
+            data = newData;
+            temp = null;
+        }
+    }
+
+    private void shrinkIfNeeded(int newSize) {
+        if (newSize <= data.length / 4) {
+            E[] newData = (E[]) new Object[data.length / 2];
+            for (int i = 0; i < size; i++) {
+                newData[i] = data[i];
+            }
+
+            E[] temp = data;
+            data = newData;
+            temp = null;
+        }
+    }
+
+    protected int capacity() {
+        return data.length;
     }
 }

@@ -69,4 +69,30 @@ public class ArrayListTest {
         assert(list1.equals(ans1));
     }
 
+    @Test
+    public void testGrow() throws Exception {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 256; i++) {
+            list.add(list.size(), i);
+        }
+
+        assertEquals(256, list.capacity());
+    }
+
+    @Test
+    public void testShrink() throws Exception {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 256; i++) {
+            list.add(list.size(), i);
+        }
+
+        for (int j = 0; j < 192; j++) {
+            list.remove(0);
+        }
+
+        System.out.println(list);
+
+        assertEquals(128, list.capacity());
+    }
+
 }
