@@ -12,11 +12,11 @@ public class ArrayList<E> implements List<E> {
     private E[] data;
     private int size = 0;
 
-    ArrayList() {
+    public ArrayList() {
         this(INITIAL_CAPACITY);
     }
 
-    ArrayList(int capacity) {
+    public ArrayList(int capacity) {
         data = (E[]) new Object[capacity]; // Safe cast
     }
 
@@ -26,8 +26,8 @@ public class ArrayList<E> implements List<E> {
 
         size = arr.length;
 
-        for (int i = 0; i < arr.length; i++) {
-            data[i] = arr[i];
+        for (E e : arr) {
+            add(size, e);
         }
     }
 
@@ -61,14 +61,21 @@ public class ArrayList<E> implements List<E> {
         checkIndex(i, size + 1);
         growIfNeeded(size + 1);
 
-        if (size == data.length) {
-            throw new IllegalStateException("Array is full"); // Should fix this with dynamic array.
-        }
         for (int k = size - 1; k >= i; k--) {
             // Shift all elements one cell to the right.
             data[k + 1] = data[k];
         }
         data[i] = element;
+        size++;
+    }
+
+    /**
+     * Adds an element at the end of the ArrayList.
+     */
+    public void add(E element) {
+        growIfNeeded(size + 1);
+
+        data[size] = element;
         size++;
     }
 
