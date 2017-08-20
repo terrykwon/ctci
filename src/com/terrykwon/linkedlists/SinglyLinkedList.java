@@ -133,6 +133,15 @@ public class SinglyLinkedList<E> {
         return true;
     }
 
+    public void print() {
+        Node<E> temp = head;
+        while (temp != null) {
+            System.out.print(temp.getElement() + " ");
+            temp = temp.getNext();
+        }
+        System.out.println();
+    }
+
     public static <E> void printList(Node<E> head) {
         while (head != null) {
             System.out.print(head.getElement() + " ");

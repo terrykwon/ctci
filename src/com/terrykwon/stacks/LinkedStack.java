@@ -32,4 +32,8 @@ public class LinkedStack<E> implements Stack<E> {
     public E pop() {
         return list.removeFirst();
     }
+
+    public void print() {
+        list.print();
+    }
 }
