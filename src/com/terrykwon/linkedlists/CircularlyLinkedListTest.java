@@ -17,6 +17,7 @@ public class CircularlyLinkedListTest {
         list.addLast(2);
         list.addLast(3);
 
+        assertEquals(4, list.size());
         assertEquals((Integer) 0, list.removeFirst());
 
         list.rotate();
