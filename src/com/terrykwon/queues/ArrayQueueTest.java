@@ -1,6 +1,5 @@
 package com.terrykwon.queues;
 
-
 import org.testng.annotations.Test;
 import static org.junit.Assert.*;
 

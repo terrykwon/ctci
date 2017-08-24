@@ -88,15 +88,15 @@ public class ArrayDeque<E> implements Deque<E> {
 
     @SuppressWarnings("unchecked")
     private void doubleCapacity() {
-        E[] doubled = (E[]) new Object[elements.length >> 1];
+        E[] doubled = (E[]) new Object[elements.length << 1];
         int r = elements.length - head; // Number of elements to the right of head
 
         System.arraycopy(elements, head, doubled, 0, r);
         System.arraycopy(elements, 0, doubled, r, head);
 
-        elements = doubled;
         head = 0;
         tail = elements.length;
+        elements = doubled;
     }
 
     void print() {
