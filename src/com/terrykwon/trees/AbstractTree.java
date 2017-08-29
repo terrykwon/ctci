@@ -2,6 +2,9 @@ package com.terrykwon.trees;
 
 import com.terrykwon.Position;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * An abstract base class providing some functionality of the Tree interface.
  */
@@ -49,5 +52,26 @@ public abstract class AbstractTree<E> implements Tree<E> {
 
         // h returns 0 if no children.
         return h;
+    }
+
+    /**
+     * A preorder traversal of positions (nodes) in the tree.
+     */
+    public Iterable<Position<E>> preorder() {
+        List<Position<E>> snapshot = new ArrayList<>();
+
+        if (!isEmpty()) {
+            preorderSubtree(root(), snapshot);
+        }
+
+        return snapshot;
+    }
+
+    private void preorderSubtree(Position<E> root, List<Position<E>> snapshot) {
+        snapshot.add(root);
+
+        for (Position<E> child : children(root)) {
+            preorderSubtree(child, snapshot);
+        }
     }
 }
