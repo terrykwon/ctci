@@ -62,7 +62,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new ElementIterator();
     }
 
     @Override
@@ -252,4 +252,24 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             this.right = right;
         }
     }
+
+    private class ElementIterator implements Iterator<E> {
+        Iterator<Position<E>> iterator = positions().iterator();
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        @Override
+        public E next() {
+            return iterator.next().getElement();
+        }
+
+        @Override
+        public void remove() {
+            iterator.remove();
+        }
+    }
+
 }
