@@ -77,4 +77,34 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
             inorderSubtree(right(root), snapshot);
         }
     }
+
+    /**
+     * Prints a simple representation of the tree that is rotated 90 degrees counterclockwise.
+     */
+    public void printRotated() {
+        printRotated(root(), 0);
+    }
+
+    /**
+     * Uses inorder traversal to print the rightmost elements first,
+     * and tracks the depth with each recursive call.
+     */
+    private void printRotated(Position<E> root, int depth) {
+
+        if (right(root) != null) {
+            printRotated(right(root), depth + 1);
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            builder.append("    ");
+        }
+        builder.append(root.getElement());
+        System.out.println(builder.toString());
+
+        if (left(root) != null) {
+            printRotated(left(root), depth + 1);
+        }
+
+    }
 }
