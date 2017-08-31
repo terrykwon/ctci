@@ -208,29 +208,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return temp;
     }
 
-    public Iterable<Position<E>> inorder() {
-        List<Position<E>> snapshot = new ArrayList<>();
-
-        if (!isEmpty()) {
-            inorderSubtree(root(), snapshot);
-        }
-
-        return snapshot;
-    }
-
-    private void inorderSubtree(Position<E> root, List<Position<E>> snapshot) {
-        if (left(root) != null) {
-            inorderSubtree(left(root), snapshot);
-        }
-
-        snapshot.add(root);
-
-        if (right(root) != null) {
-            inorderSubtree(right(root), snapshot);
-        }
-    }
-
-
     protected static class Node<E> implements Position<E> {
         private E element;
         private Node<E> parent;

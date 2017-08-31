@@ -2,8 +2,7 @@ package com.terrykwon.trees;
 
 import com.terrykwon.Position;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * An abstract base class providing some functionality of the Tree interface.
@@ -91,5 +90,26 @@ public abstract class AbstractTree<E> implements Tree<E> {
         }
 
         snapshot.add(root);
+    }
+
+    public Iterable<Position<E>> breadthFirstSearch() {
+        List<Position<E>> snapshot = new ArrayList<>();
+
+        if (isEmpty()) {
+            return snapshot;
+        }
+
+        ArrayDeque<Position<E>> fringe = new ArrayDeque<>();
+        fringe.add(root());
+
+        while (!fringe.isEmpty()) {
+            Position<E> node = fringe.removeFirst();
+            snapshot.add(node);
+            for (Position<E> child : children(node)) {
+                fringe.addLast(child);
+            }
+        }
+
+        return snapshot;
     }
 }
