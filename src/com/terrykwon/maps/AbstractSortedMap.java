@@ -3,7 +3,7 @@ package com.terrykwon.maps;
 import com.terrykwon.Entry;
 import java.util.Comparator;
 
-public abstract class AbstractSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V>
+public abstract class AbstractSortedMap<K, V> extends AbstractMap<K, V>
         implements SortedMap<K, V> {
 
     /**
@@ -19,7 +19,7 @@ public abstract class AbstractSortedMap<K extends Comparable<K>, V> extends Abst
         this.comparator = comparator;
     }
 
-    // Utilities to compare entries and keys
+    // Utilities to safeCompare entries and keys
 
     protected int compare(Entry<K, V> e1, Entry<K, V> e2) {
         return compare(e1.getKey(), e2.getKey());
@@ -38,7 +38,7 @@ public abstract class AbstractSortedMap<K extends Comparable<K>, V> extends Abst
     }
 
     @SuppressWarnings("unchecked")
-    private int compare(Object o1, Object o2) {
+    private int safeCompare(Object o1, Object o2) {
         return (comparator == null)
                 ? ((Comparable<? super K>) o1).compareTo(((K) o2)) // Lower bounded wildcard
                 : comparator.compare((K) o1,(K) o2);
