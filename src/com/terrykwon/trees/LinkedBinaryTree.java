@@ -2,11 +2,7 @@ package com.terrykwon.trees;
 
 
 import com.terrykwon.Position;
-import javafx.geometry.Pos;
-
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 

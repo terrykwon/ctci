@@ -1,7 +1,6 @@
 package com.terrykwon.trees;
 
 import com.terrykwon.Position;
-
 import java.util.ArrayList;
 import java.util.List;
 
