@@ -1,8 +1,9 @@
-package com.terrykwon.trees;
+package com.terrykwon.maps;
 
 import com.terrykwon.Entry;
 import com.terrykwon.Position;
 import com.terrykwon.maps.AbstractSortedMap;
+import com.terrykwon.trees.LinkedBinaryTree;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -190,6 +191,33 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         return treeMax(tree.root()).getElement();
     }
 
+    public void printRotatedTree() {
+        printRotated(tree.root(), 0);
+    }
+
+    /**
+     * Uses inorder traversal to print the rightmost elements first,
+     * and tracks the depth with each recursive call.
+     */
+    private void printRotated(Position<Entry<K, V>> root, int depth) {
+
+        if (tree.isInternal(tree.right(root))) {
+            printRotated(tree.right(root), depth + 1);
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            builder.append("    ");
+        }
+        builder.append(root.getElement().getValue());
+        System.out.println(builder.toString());
+
+        if (tree.isInternal(tree.left(root))) {
+            printRotated(tree.left(root), depth + 1);
+        }
+
+    }
+
     // Not implemented
     // Should be the same as get() except you return the parent or max/min child if not found.
     @Override
@@ -227,9 +255,11 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     /**
      * Basically an inorder traversal that is bounded by fromKey and toKey.
      *
+     * @TODO UNDERSTAND
+     *
      * If the root is smaller than fromKey, traverses the right subtree.
+     * If the root is larger than fromKey, traverses the left subtree.
      * If the root is between fromKey and toKey, adds the root, then moves on to the right subtree.
-     * If the root is larger than toKey, traverses the left subtree.
      */
     private void subMapRecurse(K fromKey, K toKey, Position<Entry<K, V>> root, ArrayList<Entry<K, V>> buffer) {
         if (tree.isExternal(root)) {

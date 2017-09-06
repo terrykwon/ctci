@@ -22,19 +22,19 @@ public abstract class AbstractSortedMap<K, V> extends AbstractMap<K, V>
     // Utilities to safeCompare entries and keys
 
     protected int compare(Entry<K, V> e1, Entry<K, V> e2) {
-        return compare(e1.getKey(), e2.getKey());
+        return safeCompare(e1.getKey(), e2.getKey());
     }
 
     protected int compare(K key, Entry<K, V> entry) {
-        return compare(key, entry.getKey());
+        return safeCompare(key, entry.getKey());
     }
 
     protected int compare(Entry<K, V> entry, K key) {
-        return compare(entry.getKey(), key);
+        return safeCompare(entry.getKey(), key);
     }
 
     protected int compare(K key1, K key2) {
-        return compare(key1, key2);
+        return safeCompare(key1, key2);
     }
 
     @SuppressWarnings("unchecked")
