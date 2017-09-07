@@ -8,6 +8,10 @@ public class TreeNode<E> {
     TreeNode<E> leftChild;
     TreeNode<E> rightChild;
 
+    public TreeNode() {
+        this(null, null, null);
+    }
+
     public TreeNode(E element) {
         this(element, null, null);
     }
