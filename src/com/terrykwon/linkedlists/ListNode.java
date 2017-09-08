@@ -13,6 +13,10 @@ public class ListNode<E> {
         this(null, null);
     }
 
+    public ListNode(E element) {
+        this(element, null);
+    }
+
     public ListNode(E element, ListNode<E> next) {
         this.element = element;
         this.next = next;
