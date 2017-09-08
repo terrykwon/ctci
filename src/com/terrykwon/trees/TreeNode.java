@@ -4,9 +4,9 @@ package com.terrykwon.trees;
  * A node class for use in CTCI problems.
  */
 public class TreeNode<E> {
-    E element;
-    TreeNode<E> leftChild;
-    TreeNode<E> rightChild;
+    public E element;
+    public TreeNode<E> leftChild;
+    public TreeNode<E> rightChild;
 
     public TreeNode() {
         this(null, null, null);

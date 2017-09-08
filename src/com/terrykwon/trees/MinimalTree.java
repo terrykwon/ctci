@@ -1,5 +1,8 @@
 package com.terrykwon.trees;
 
+import static com.terrykwon.Utils.printInorder;
+import static com.terrykwon.Utils.printRotated;
+
 /**
  * Given a sorted (increasing order) array with unique integer elements, write an algorithm to create a
  * binary search tree with minimal height.
@@ -40,48 +43,6 @@ public class MinimalTree {
         }
 
         return root;
-    }
-
-    private static void printInorder(TreeNode<Integer> root) {
-        if (root.leftChild != null) {
-            printInorder(root.leftChild);
-        }
-
-        System.out.print(root.element + " ");
-
-        if (root.rightChild != null) {
-            printInorder(root.rightChild);
-        }
-    }
-
-    /**
-     * Prints a simple representation of the tree that is rotated 90 degrees counterclockwise.
-     */
-    public static void printRotated(TreeNode<Integer> root) {
-        printRotated(root, 0);
-    }
-
-    /**
-     * Uses inorder traversal to print the rightmost elements first,
-     * and tracks the depth with each recursive call.
-     */
-    private static void printRotated(TreeNode<Integer> root, int depth) {
-
-        if (root.rightChild != null) {
-            printRotated(root.rightChild, depth + 1);
-        }
-
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < depth; i++) {
-            builder.append("    ");
-        }
-        builder.append(root.element);
-        System.out.println(builder.toString());
-
-        if (root.leftChild != null) {
-            printRotated(root.leftChild, depth + 1);
-        }
-
     }
 
     public static void main(String[] args) {
