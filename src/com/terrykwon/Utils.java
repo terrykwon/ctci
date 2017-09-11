@@ -1,6 +1,9 @@
 package com.terrykwon;
 
+import com.terrykwon.linkedlists.ListNode;
 import com.terrykwon.trees.TreeNode;
+
+import java.util.ArrayDeque;
 
 /**
  * Util methods for convenience.
@@ -11,6 +14,8 @@ public class Utils {
     private Utils() {
 
     }
+
+    // Array Utils
 
     public static void printArray(char[][] arr) {
         for (char[] row : arr) {
@@ -47,33 +52,33 @@ public class Utils {
 
     // Tree Utils
 
-    public static void printInorder(TreeNode<Integer> root) {
+    public static void printTreeInorder(TreeNode<Integer> root) {
         if (root.leftChild != null) {
-            printInorder(root.leftChild);
+            printTreeInorder(root.leftChild);
         }
 
         System.out.print(root.element + " ");
 
         if (root.rightChild != null) {
-            printInorder(root.rightChild);
+            printTreeInorder(root.rightChild);
         }
     }
 
     /**
      * Prints a simple representation of the tree that is rotated 90 degrees counterclockwise.
      */
-    public static void printRotated(TreeNode<Integer> root) {
-        printRotated(root, 0);
+    public static void printTreeRotated(TreeNode<Integer> root) {
+        printTreeRotated(root, 0);
     }
 
     /**
      * Uses inorder traversal to print the rightmost elements first,
      * and tracks the depth with each recursive call.
      */
-    private static void printRotated(TreeNode<Integer> root, int depth) {
+    private static void printTreeRotated(TreeNode<Integer> root, int depth) {
 
         if (root.rightChild != null) {
-            printRotated(root.rightChild, depth + 1);
+            printTreeRotated(root.rightChild, depth + 1);
         }
 
         StringBuilder builder = new StringBuilder();
@@ -84,9 +89,60 @@ public class Utils {
         System.out.println(builder.toString());
 
         if (root.leftChild != null) {
-            printRotated(root.leftChild, depth + 1);
+            printTreeRotated(root.leftChild, depth + 1);
         }
+    }
 
+    /**
+     * A preorder DFS implemented iteratively using a stack.
+     */
+    private static <E> void dfs(TreeNode<E> root) {
+        ArrayDeque<TreeNode<E>> stack = new ArrayDeque<>();
+        stack.add(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode<E> current = stack.pop();
+
+            System.out.print(current.element + " ");
+
+            if (current.rightChild != null) {
+                stack.push(current.rightChild);
+            }
+
+            if (current.leftChild != null) {
+                stack.push(current.leftChild);
+            }
+        }
+        System.out.println();
+    }
+
+    private static <E> void bfs(TreeNode<E> root) {
+        ArrayDeque<TreeNode<E>> queue = new ArrayDeque<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode<E> current = queue.removeFirst();
+
+            System.out.print(current.element + " ");
+
+            if (current.leftChild != null) {
+                queue.addLast(current.leftChild);
+            }
+
+            if (current.rightChild != null) {
+                queue.addLast(current.rightChild);
+            }
+        }
+        System.out.println();
+    }
+
+    // LinkedList Utils
+
+    public static <E> void printLinkedList(ListNode<E> head) {
+        while (head != null) {
+            System.out.print(head.element + " ");
+            head = head.next;
+        }
     }
 
 
