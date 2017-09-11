@@ -21,7 +21,7 @@ public class ListOfDepths {
      * Uses a preorder DFS to iterate through all nodes recursively, while passing a depth parameter.
      *
      * Time complexity: O(N)
-     * Space complexity: O(N), due to recursion.
+     * Space complexity: O(log(N)), due to recursion, but O(N) due to output LinkedList.
      */
     private static <E> HashMap<Integer, ListNode<E>> listOfDepths(TreeNode<E> root) {
         HashMap<Integer, ListNode<E>> map = new HashMap<>();

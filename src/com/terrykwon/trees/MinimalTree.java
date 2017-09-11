@@ -19,7 +19,7 @@ public class MinimalTree {
      * subarray becomes the right child.
      *
      * Time complexity: O(N)
-     * Space complexity: O(N), due to recursion.
+     * Space complexity: O(log(N)), due to recursion., but O(N) due to output tree.
      *
      * @param arr an Integer array sorted in increasing order, with no duplicate elements.
      * @return the root of the generated binary search tree.
