@@ -12,26 +12,42 @@ public class CheckBalanced {
 
     }
 
-//    private static <E> boolean checkBalanced(TreeNode<E> root) {
-//        if (root == null) {
-//            return true;
-//        }
-//
-//        if (root.leftChild != null && root.rightChild != null) {
-//            return checkBalanced(root.leftChild) && checkBalanced(root.rightChild);
-//        }
-//
-//        if (root.leftChild == null) {
-//            if (root.rightChild.leftChild != null || root.rightChild.rightChild != null) {
-//                return false;
-//            }
-//        } else {
-//            if (root.leftChild.leftChild != null || root.leftChild.rightChild != null) {
-//                return false;
-//            }
-//        }
-//
-//    }
+    /**
+     * Recursively tracks the height of each subtree while also checking for the balancing condition.
+     *
+     * Time complexity: O(N)
+     * Space complexity: O(H), where H is the height of the tree.
+     */
+    private static <E> boolean checkBalanced(TreeNode<E> root) {
+        return (getHeightIfBalanced(root) != -1);
+    }
+
+    /**
+     * Returns -1 if the subtree rooted at node is unbalanced, or the height if it is balanced.
+     * This allows upper nodes to compare the height of left and right subtrees to check for balance,
+     * unless it is already found that a subtree is unbalanced, in which case, -1 is propagated upwards.
+     */
+    private static int getHeightIfBalanced(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int lHeight = getHeightIfBalanced(root.leftChild);
+        if (lHeight == -1) {
+            return -1;
+        }
+
+        int rHeight = getHeightIfBalanced(root.rightChild);
+        if (rHeight == -1) {
+            return -1;
+        }
+
+        if (Math.abs(lHeight - rHeight) > 1) {
+            return -1;
+        }
+
+        return Math.max(lHeight, rHeight) + 1;
+    }
 
     /**
      * Naive solution that compares the height of the left and right subtree, then does the same recursively
@@ -104,10 +120,10 @@ public class CheckBalanced {
         TreeNode<Integer> t1 = buildBalancedTree();
         Utils.printTreeRotated(t1);
         System.out.println(height(t1)); // 4
-        System.out.println(checkBalanced2(t1));
+        System.out.println(checkBalanced(t1));
 
         TreeNode<Integer> t2 = buildUnbalancedTree();
         Utils.printTreeRotated(t2);
-        System.out.println(checkBalanced2(t2));
+        System.out.println(checkBalanced(t2));
     }
 }
