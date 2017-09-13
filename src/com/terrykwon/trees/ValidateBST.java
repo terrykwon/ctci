@@ -37,7 +37,7 @@ public class ValidateBST {
         }
         // Update previous inorder value.
         prevVal[0] = root.element;
-        System.out.print(prevVal[0] + " ");
+//        System.out.print(prevVal[0] + " ");
 
         if (root.rightChild != null) {
             validatedRight = inorderValidate(root.rightChild, prevVal);
@@ -47,35 +47,35 @@ public class ValidateBST {
     }
 
     /**
-     * Checks left <= root < right, while maintaining min and max nodes to ensure that all values in the left
+     * Checks left <= root < right, while maintaining min and max values to ensure that all values in the left
      * subtree are smaller than the root, while all values in the right subtree are larger.
      *
-     * TODO: IMPLEMENT
+     * Time complexity: O(N)
+     * Space complexity: O(H)
      */
     private static boolean validateBst(TreeNode<Integer> root) {
-        if (root.leftChild == null && root.rightChild == null) {
+        return validateBst(root, null, null);
+    }
+
+    private static boolean validateBst(TreeNode<Integer> root, Integer min, Integer max) {
+        if (root == null) {
             return true;
         }
 
-        // Assume left and right subtrees validated until proven false.
-        boolean validateLeft = true;
-        boolean validateRight = true;
-
-        if (root.leftChild != null) {
-            if (root.leftChild.element > root.element) {
-                return false;
-            }
-            validateLeft = validateBst(root.leftChild);
+        // Check that root is between min and max
+        if ((min != null && root.element <= min) || (max != null && root.element > max)) {
+            return false;
         }
 
-        if (root.rightChild != null) {
-            if (root.rightChild.element < root.element) {
-                return false;
-            }
-            validateRight = validateBst(root.rightChild);
+        if (!validateBst(root.leftChild, min, root.element)) {
+            return false;
         }
 
-        return validateLeft && validateRight;
+        if (!validateBst(root.rightChild, root.element, max)) {
+            return false;
+        }
+
+        return true;
     }
 
     private static TreeNode<Integer> buildBst() {
@@ -122,17 +122,17 @@ public class ValidateBST {
     public static void main(String[] args) {
         TreeNode<Integer> t1 = buildBst();
         Utils.printTreeRotated(t1);
-//        System.out.println(validateBst(t1)); // true
+        System.out.println(validateBst(t1)); // true
         System.out.println(inorderValidate(t1));
 
         TreeNode<Integer> t2 = buildNonBst1();
         Utils.printTreeRotated(t2);
-//        System.out.println(validateBst(t2)); // false
+        System.out.println(validateBst(t2)); // false
         System.out.println(inorderValidate(t2));
 
         TreeNode<Integer> t3 = buildNonBst2();
         Utils.printTreeRotated(t3);
-//        System.out.println(validateBst(t3));
+        System.out.println(validateBst(t3));
         System.out.println(inorderValidate(t3)); // false
     }
 }
