@@ -12,6 +12,41 @@ public class FirstCommonAncestor {
     }
 
     /**
+     * A more efficient implementation that passes n1 or n2 upwards through recursion if found.
+     *
+     * Time complexity: O(N)
+     * Space complexity: O(D)
+     */
+    private static TreeNode firstCommonAncestor2(TreeNode root, TreeNode n1, TreeNode n2) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root == n1 && root == n2) {
+            return root;
+        }
+
+        TreeNode x = firstCommonAncestor2(root.leftChild, n1, n2);
+        if (x != null && x != n1 && x != n2) { // Already found ancestor
+            return x;
+        }
+
+        TreeNode y = firstCommonAncestor2(root.rightChild, n1, n2);
+        if (y != null && y != n1 && y != n2) { // Already found ancestor
+            return y;
+        }
+
+        if (x != null && y != null) { // n1 and n2 found in left and right subtree of root.
+            return root;
+        } else if (n1 == root || n2 == root) {
+            return root;
+        } else {
+            return x == null ? y : x; // return the non-null value, if available.
+        }
+
+    }
+
+    /**
      * Uses a naive approach where a tree is fully traversed to check if n1 and n2 are present; if true, then
      * root's subtrees are traversed. This repeats until a subtree does not contain n1 and n2, meaning that
      * its parent its the first common ancestor.
@@ -95,7 +130,11 @@ public class FirstCommonAncestor {
         root.rightChild.leftChild.leftChild = n11;
 
         System.out.println(firstCommonAncestor(root, n4, n10).element); // 2
+        System.out.println(firstCommonAncestor2(root, n4, n10).element);
         System.out.println(firstCommonAncestor(root, n10, n11).element); // 1
+        System.out.println(firstCommonAncestor2(root, n10, n11).element);
+
+
 
     }
 }
